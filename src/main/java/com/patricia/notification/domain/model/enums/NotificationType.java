@@ -1,4 +1,4 @@
-package com.alphaeci.notification.domain.model.enums;
+package com.patricia.notification.domain.model.enums;
 
 public enum NotificationType {
     CONNECTION_REQUEST,
