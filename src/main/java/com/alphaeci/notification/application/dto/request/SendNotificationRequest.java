@@ -14,7 +14,7 @@ import lombok.Getter;
 @Builder
 public class SendNotificationRequest {
 
-    @NotBlank
+    @NotNull
     private UUID userId;
 
     @NotNull
@@ -31,5 +31,5 @@ public class SendNotificationRequest {
     @Size(max = 200)
     private String body;
 
-    private String referenceId;
+    private UUID referenceId;
 }
