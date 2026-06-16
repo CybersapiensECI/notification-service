@@ -20,7 +20,7 @@ public class UpdatePreferencesUseCaseImpl implements UpdatePreferencesUseCase {
     private final NotificationMapper notificationMapper;
 
     @Override
-    public PreferencesResponse execute(String userId, UpdatePreferencesRequest request) {
+    public PreferencesResponse execute(UUID userId, UpdatePreferencesRequest request) {
         NotificationPreferences existing = preferencesRepository.findByUserId(userId)
                 .orElseGet(() -> NotificationPreferences.builder()
                         .id(UUID.randomUUID())

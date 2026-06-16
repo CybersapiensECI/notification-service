@@ -19,13 +19,13 @@ public class GetPreferencesUseCaseImpl implements GetPreferencesUseCase {
     private final NotificationMapper notificationMapper;
 
     @Override
-    public PreferencesResponse execute(String userId) {
+    public PreferencesResponse execute(UUID userId) {
         NotificationPreferences prefs = preferencesRepository.findByUserId(userId)
                 .orElseGet(() -> createDefaultPreferences(userId));
         return notificationMapper.toPreferencesResponse(prefs);
     }
 
-    private NotificationPreferences createDefaultPreferences(String userId) {
+    private NotificationPreferences createDefaultPreferences(UUID userId) {
         NotificationPreferences defaults = NotificationPreferences.builder()
                 .id(UUID.randomUUID())
                 .userId(userId)

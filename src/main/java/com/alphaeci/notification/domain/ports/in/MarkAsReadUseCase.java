@@ -1,6 +1,8 @@
 package com.alphaeci.notification.domain.ports.in;
 
+import java.util.UUID;
+
 public interface MarkAsReadUseCase {
-    void markOne(String userId, String notificationId);
-    void markAll(String userId);
+    void markOne(UUID userId, String notificationId);
+    void markAll(UUID userId);
 }

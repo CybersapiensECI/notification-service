@@ -1,6 +1,5 @@
 package com.alphaeci.notification.application.mapper;
 
-import com.alphaeci.notification.application.dto.request.CreateEventReminderRequest;
 import com.alphaeci.notification.application.dto.request.SendNotificationRequest;
 import com.alphaeci.notification.application.dto.response.EventReminderResponse;
 import com.alphaeci.notification.application.dto.response.NotificationResponse;
@@ -22,11 +21,6 @@ public interface NotificationMapper {
     NotificationResponse toNotificationResponse(Notification notification);
 
     PreferencesResponse toPreferencesResponse(NotificationPreferences preferences);
-
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "reminded24h", constant = "false")
-    @Mapping(target = "reminded1h", constant = "false")
-    EventReminder toEventReminder(CreateEventReminderRequest request, @org.mapstruct.Context String userId);
 
     EventReminderResponse toEventReminderResponse(EventReminder reminder);
 }

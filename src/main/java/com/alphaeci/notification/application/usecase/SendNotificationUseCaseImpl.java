@@ -50,7 +50,7 @@ public class SendNotificationUseCaseImpl implements SendNotificationUseCase {
         notificationDeliveryPort.deliverRealTime(notification);
 
         if (CRITICAL_TYPES.contains(notification.getType())) {
-            notificationDeliveryPort.deliverEmail(notification, request.getUserId());
+            notificationDeliveryPort.deliverEmail(notification, request.getUserId().toString());
         }
     }
 

@@ -1,5 +1,7 @@
 package com.alphaeci.notification.application.dto.request;
 
+import java.util.UUID;
+
 import com.alphaeci.notification.domain.model.enums.NotificationChannel;
 import com.alphaeci.notification.domain.model.enums.NotificationType;
 import jakarta.validation.constraints.NotBlank;
@@ -13,7 +15,7 @@ import lombok.Getter;
 public class SendNotificationRequest {
 
     @NotBlank
-    private String userId;
+    private UUID userId;
 
     @NotNull
     private NotificationType type;

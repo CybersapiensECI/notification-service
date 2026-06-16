@@ -1,5 +1,7 @@
 package com.alphaeci.notification.application.usecase;
 
+import java.util.UUID;
+
 import com.alphaeci.notification.application.dto.response.NotificationResponse;
 import com.alphaeci.notification.application.mapper.NotificationMapper;
 import com.alphaeci.notification.domain.ports.in.GetNotificationsUseCase;
@@ -17,7 +19,7 @@ public class GetNotificationsUseCaseImpl implements GetNotificationsUseCase {
     private final NotificationMapper notificationMapper;
 
     @Override
-    public Page<NotificationResponse> execute(String userId, Pageable pageable) {
+    public Page<NotificationResponse> execute(UUID userId, Pageable pageable) {
         return notificationRepository.findAllByUserId(userId, pageable)
                 .map(notificationMapper::toNotificationResponse);
     }

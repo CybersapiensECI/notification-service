@@ -19,7 +19,7 @@ public class CreateEventReminderUseCaseImpl implements CreateEventReminderUseCas
     private final NotificationMapper notificationMapper;
 
     @Override
-    public EventReminderResponse execute(String userId, CreateEventReminderRequest request) {
+    public EventReminderResponse execute(UUID userId, CreateEventReminderRequest request) {
         EventReminder reminder = EventReminder.builder()
                 .id(UUID.randomUUID())
                 .userId(userId)
