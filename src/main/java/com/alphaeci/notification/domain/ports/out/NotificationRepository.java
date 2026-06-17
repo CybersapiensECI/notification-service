@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface NotificationRepository {
     Notification save(Notification notification);
-    Optional<Notification> findById(String id);
+    Optional<Notification> findById(UUID id);
     Page<Notification> findAllByUserId(UUID userId, Pageable pageable);
     long countUnreadByUserId(UUID userId);
-    void markAsRead(String notificationId);
+    void markAsRead(UUID notificationId);
     void markAllAsRead(UUID userId);
 }

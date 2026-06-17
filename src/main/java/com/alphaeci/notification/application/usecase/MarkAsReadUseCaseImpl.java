@@ -1,12 +1,12 @@
 package com.alphaeci.notification.application.usecase;
 
-import java.util.UUID;
-
 import com.alphaeci.notification.domain.exceptions.NotificationNotFoundException;
 import com.alphaeci.notification.domain.ports.in.MarkAsReadUseCase;
 import com.alphaeci.notification.domain.ports.out.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -15,9 +15,9 @@ public class MarkAsReadUseCaseImpl implements MarkAsReadUseCase {
     private final NotificationRepository notificationRepository;
 
     @Override
-    public void markOne(UUID userId, String notificationId) {
+    public void markOne(UUID userId, UUID notificationId) {
         notificationRepository.findById(notificationId)
-                .orElseThrow(() -> new NotificationNotFoundException(notificationId));
+                .orElseThrow(() -> new NotificationNotFoundException(notificationId.toString()));
         notificationRepository.markAsRead(notificationId);
     }
 
