@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/notifications/preferences")
+@RequestMapping(value = "/api/notifications/preferences", produces = "application/json")
 @RequiredArgsConstructor
 public class PreferencesController {
 

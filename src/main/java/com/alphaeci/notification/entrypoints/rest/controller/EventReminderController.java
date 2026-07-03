@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/notifications/reminders")
+@RequestMapping(value = "/api/notifications/reminders", produces = "application/json")
 @RequiredArgsConstructor
 public class EventReminderController {
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/notifications")
+@RequestMapping(value = "/api/notifications", produces = "application/json")
 @RequiredArgsConstructor
 public class NotificationController {
 
