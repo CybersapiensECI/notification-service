@@ -41,15 +41,15 @@ jobs:
       - name: Deploy to Azure Container Apps (QA)
         run: |
           az containerapp registry set \
-            --name notification-service-qa \
-            --resource-group alphaECI-prod \
+            --name notification-service \
+            --resource-group rg-alphaeci \
             --server ghcr.io \
             --username ${{ github.actor }} \
             --password ${{ secrets.GITHUB_TOKEN }}
 
           az containerapp update \
-            --name notification-service-qa \
-            --resource-group alphaECI-prod \
+            --name notification-service \
+            --resource-group rg-alphaeci \
             --image ${{ env.IMAGE_NAME }}:qa-${{ github.sha }} \
             --set-env-vars \
               SPRING_DATA_MONGODB_URI=${{ secrets.MONGODB_URI_NOTIFICATION }} \
