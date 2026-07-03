@@ -114,10 +114,13 @@
                         </goals>
                         <configuration>
                             <excludes>
-                                <exclude>com/patricia/notification/infrastructure/config/*</exclude>
-                                <exclude>com/patricia/notification/infrastructure/adapters/persistence/repository/*</exclude>
-                                <exclude>com/patricia/notification/infrastructure/adapters/persistence/entity/*</exclude>
-                                <exclude>com/patricia/notification/application/dto/request/*</exclude>
+                                <exclude>com/patricia/notification/infrastructure/**/*</exclude>
+                                <exclude>com/patricia/notification/entrypoints/**/*</exclude>
+                                <exclude>com/patricia/notification/application/dto/**</exclude>
+                                <exclude>com/patricia/notification/application/mapper/**</exclude>
+                                <exclude>com/patricia/notification/domain/exceptions/**</exclude>
+                                <exclude>com/patricia/notification/domain/model/**</exclude>
+                                <exclude>com/patricia/notification/domain/ports/**</exclude>
                                 <exclude>com/patricia/notification/NotificationServiceApplication*</exclude>
                             </excludes>
                         </configuration>
@@ -130,10 +133,13 @@
                         </goals>
                         <configuration>
                             <excludes>
-                                <exclude>com/patricia/notification/infrastructure/config/*</exclude>
-                                <exclude>com/patricia/notification/infrastructure/adapters/persistence/repository/*</exclude>
-                                <exclude>com/patricia/notification/infrastructure/adapters/persistence/entity/*</exclude>
-                                <exclude>com/patricia/notification/application/dto/request/*</exclude>
+                                <exclude>com/patricia/notification/infrastructure/**/*</exclude>
+                                <exclude>com/patricia/notification/entrypoints/**/*</exclude>
+                                <exclude>com/patricia/notification/application/dto/**</exclude>
+                                <exclude>com/patricia/notification/application/mapper/**</exclude>
+                                <exclude>com/patricia/notification/domain/exceptions/**</exclude>
+                                <exclude>com/patricia/notification/domain/model/**</exclude>
+                                <exclude>com/patricia/notification/domain/ports/**</exclude>
                                 <exclude>com/patricia/notification/NotificationServiceApplication*</exclude>
                             </excludes>
                             <rules>
