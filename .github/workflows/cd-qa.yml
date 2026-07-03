@@ -46,7 +46,9 @@ jobs:
             --image ${{ env.IMAGE_NAME }}:qa-${{ github.sha }} \
             --registry-server ghcr.io \
             --registry-username ${{ github.actor }} \
-            --registry-password ${{ secrets.GITHUB_TOKEN }}
+            --registry-password ${{ secrets.GITHUB_TOKEN }} \
+            --ingress external \
+            --target-port 8080
 
           az containerapp update \
             --name notification-service \
