@@ -40,18 +40,14 @@ jobs:
 
       - name: Deploy to Azure Container Apps (QA)
         run: |
-          az containerapp registry set \
-            --name notification-service \
-            --resource-group rg-alphaeci \
-            --server ghcr.io \
-            --username ${{ github.actor }} \
-            --password ${{ secrets.GITHUB_TOKEN }}
-
-          az containerapp update \
+          az containerapp up \
             --name notification-service \
             --resource-group rg-alphaeci \
             --image ${{ env.IMAGE_NAME }}:qa-${{ github.sha }} \
-            --set-env-vars \
+            --registry-server ghcr.io \
+            --registry-username ${{ github.actor }} \
+            --registry-password ${{ secrets.GITHUB_TOKEN }} \
+            --env-vars \
               SPRING_DATA_MONGODB_URI=${{ secrets.MONGODB_URI_NOTIFICATION }} \
               SPRING_RABBITMQ_HOST=${{ secrets.RABBITMQ_HOST }} \
               SPRING_RABBITMQ_PORT=5671 \
