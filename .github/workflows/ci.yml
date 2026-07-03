@@ -22,7 +22,7 @@ jobs:
           cache: maven
 
       - name: Build and run tests
-        run: mvn verify -e
+        run: mvn verify -q
         env:
           SPRING_DATA_MONGODB_URI: ${{ secrets.MONGODB_URI_NOTIFICATION }}
           SPRING_RABBITMQ_HOST: ${{ secrets.RABBITMQ_HOST }}
