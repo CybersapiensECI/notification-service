@@ -2,6 +2,7 @@ package com.alphaeci.notification.application.usecase;
 
 import com.alphaeci.notification.application.dto.request.SendNotificationRequest;
 import com.alphaeci.notification.application.mapper.NotificationMapper;
+import com.alphaeci.notification.domain.exceptions.InvalidNotificationException;
 import com.alphaeci.notification.domain.exceptions.NotificationTypeDisabledException;
 import com.alphaeci.notification.domain.model.Notification;
 import com.alphaeci.notification.domain.model.NotificationPreferences;
@@ -50,8 +51,18 @@ public class SendNotificationUseCaseImpl implements SendNotificationUseCase {
         notificationDeliveryPort.deliverRealTime(notification);
 
         if (CRITICAL_TYPES.contains(notification.getType())) {
-            notificationDeliveryPort.deliverEmail(notification, request.getUserId().toString());
+            notificationDeliveryPort.deliverEmail(notification, requireRecipientEmail(request));
         }
+    }
+
+    private String requireRecipientEmail(SendNotificationRequest request) {
+        String email = request.getRecipientEmail();
+        if (email == null || email.isBlank()) {
+            throw new InvalidNotificationException(
+                    "recipientEmail is required for notification type " + request.getType()
+                            + "; the producer must supply the user's address.");
+        }
+        return email;
     }
 
     private void validateTypeEnabled(NotificationPreferences prefs, NotificationType type) {

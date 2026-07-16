@@ -24,7 +24,7 @@ public class AuthNotificationConsumer {
 
         String body = switch (event.getType()) {
             case OTP_VERIFICATION -> "Tu código OTP es: " + event.getOtp();
-            case PASSWORD_RESET -> "Haz clic para restablecer tu contraseña";
+            case PASSWORD_RESET -> "Tu código de recuperación es: " + event.getOtp();
             default -> "Revisa tu cuenta";
         };
 
@@ -35,6 +35,7 @@ public class AuthNotificationConsumer {
                 .title(title)
                 .body(body)
                 .referenceId(event.getReferenceId())
+                .recipientEmail(event.getEmail())
                 .build());
     }
 }
