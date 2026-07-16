@@ -42,7 +42,8 @@ jobs:
         run: |
           az containerapp up \
             --name notification-service-prod \
-            --resource-group rg-alphaeci \
+            --resource-group gr-alphaeci-prod \
+            --environment gr-alphaeci-prod \
             --image ${{ env.IMAGE_NAME }}:${{ github.ref_name }} \
             --registry-server ghcr.io \
             --registry-username ${{ github.actor }} \
@@ -52,7 +53,7 @@ jobs:
 
           az containerapp update \
             --name notification-service-prod \
-            --resource-group rg-alphaeci \
+            --resource-group gr-alphaeci-prod \
             --min-replicas 0 \
             --max-replicas 1 \
             --set-env-vars \

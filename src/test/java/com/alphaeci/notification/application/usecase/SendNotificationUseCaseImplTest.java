@@ -2,6 +2,7 @@ package com.alphaeci.notification.application.usecase;
 
 import com.alphaeci.notification.application.dto.request.SendNotificationRequest;
 import com.alphaeci.notification.application.mapper.NotificationMapper;
+import com.alphaeci.notification.domain.exceptions.InvalidNotificationException;
 import com.alphaeci.notification.domain.exceptions.NotificationTypeDisabledException;
 import com.alphaeci.notification.domain.model.Notification;
 import com.alphaeci.notification.domain.model.NotificationPreferences;
@@ -96,13 +97,14 @@ class SendNotificationUseCaseImplTest {
     }
 
     @Test
-    void execute_criticalType_skipsPreferencesCheck_sendsEmail() {
+    void execute_criticalType_skipsPreferencesCheck_sendsEmailToRecipientAddress() {
         SendNotificationRequest request = SendNotificationRequest.builder()
                 .userId(userId)
                 .type(NotificationType.OTP_VERIFICATION)
                 .channel(NotificationChannel.EMAIL)
                 .title("OTP")
                 .body("123456")
+                .recipientEmail("estudiante@mail.escuelaing.edu.co")
                 .build();
 
         Notification otpNotification = notification.toBuilder()
@@ -116,7 +118,28 @@ class SendNotificationUseCaseImplTest {
 
         verify(preferencesRepository, never()).findByUserId(any());
         verify(notificationDeliveryPort).deliverRealTime(any());
-        verify(notificationDeliveryPort).deliverEmail(any(), eq(userId.toString()));
+        verify(notificationDeliveryPort).deliverEmail(any(), eq("estudiante@mail.escuelaing.edu.co"));
+    }
+
+    @Test
+    void execute_criticalType_withoutRecipientEmail_throwsException() {
+        SendNotificationRequest request = SendNotificationRequest.builder()
+                .userId(userId)
+                .type(NotificationType.PASSWORD_RESET)
+                .channel(NotificationChannel.EMAIL)
+                .title("Reset")
+                .body("123456")
+                .build();
+
+        Notification resetNotification = notification.toBuilder()
+                .type(NotificationType.PASSWORD_RESET)
+                .build();
+
+        when(notificationMapper.toNotification(request)).thenReturn(resetNotification);
+        when(notificationRepository.save(any())).thenReturn(resetNotification);
+
+        assertThrows(InvalidNotificationException.class, () -> useCase.execute(request));
+        verify(notificationDeliveryPort, never()).deliverEmail(any(), any());
     }
 
     @Test
