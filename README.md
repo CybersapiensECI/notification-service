@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🔔 PATRICI.A — Microservicio de Notificaciones
+# 🔔 AlphaEci — Microservicio de Notificaciones
 
 ![Java](https://img.shields.io/badge/Java-21-007396?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.0-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
@@ -10,7 +10,7 @@
 ![Azure](https://img.shields.io/badge/Azure-Container_Apps-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
 ![Hexagonal](https://img.shields.io/badge/Architecture-Hexagonal-blueviolet?style=for-the-badge)
 
-> 💡 **PATRICI.A** es un proyecto académico de la Escuela Colombiana de Ingeniería Julio Garavito, construido con arquitectura de microservicios orientada a producción.
+> 💡 **AlphaEci** es un proyecto académico de la Escuela Colombiana de Ingeniería Julio Garavito, construido con arquitectura de microservicios orientada a producción.
 
 </div>
 
@@ -18,36 +18,25 @@
 
 ## 📑 Tabla de Contenidos
 
-1. [👤 Integrantes](#1--integrantes)
-2. [⚙️ Tecnologías Utilizadas](#2-️-tecnologías-utilizadas)
-3. [🎯 Descripción del Módulo](#3--descripción-del-módulo)
-4. [🏗️ Cómo Funciona el Módulo](#4-️-cómo-funciona-el-módulo)
-5. [📊 Diagramas](#5--diagramas)
-6. [🧩 Funcionalidades](#6--funcionalidades)
-7. [🧪 Evidencia de Pruebas Unitarias](#7--evidencia-de-pruebas-unitarias)
-8. [📈 Evidencia de Cobertura](#8--evidencia-del-análisis-de-cobertura)
-9. [🚀 Cómo Ejecutar el Proyecto](#9--cómo-ejecutar-el-proyecto)
-10. [🔄 Evidencia CI/CD](#10--evidencia-del-despliegue-cicd)
-11. [🌐 Link Expuesto en Azure con Swagger](#11--link-expuesto-en-azure-con-swagger)
-12. [🗂️ Organización del Código](#12-️-organización-del-código)
-13. [📝 Código Documentado](#13--código-documentado)
-14. [🔗 Conexiones con Servicios Externos](#14--conexiones-con-servicios-externos)
-15. [⚙️ Pipeline de Desarrollo](#15-️-pipeline-de-desarrollo)
-16. [🚢 Pipeline de PROD](#16--pipeline-de-prod)
 
----
+1. [⚙️ Tecnologías Utilizadas](#2-️-tecnologías-utilizadas)
+2. [🎯 Descripción del Módulo](#3--descripción-del-módulo)
+3. [🏗️ Cómo Funciona el Módulo](#4-️-cómo-funciona-el-módulo)
+4. [📊 Diagramas](#5--diagramas)
+5. [🧩 Funcionalidades](#6--funcionalidades)
+6. [🧪 Evidencia de Pruebas Unitarias](#7--evidencia-de-pruebas-unitarias)
+7. [📈 Evidencia de Cobertura](#8--evidencia-del-análisis-de-cobertura)
+8. [🚀 Cómo Ejecutar el Proyecto](#9--cómo-ejecutar-el-proyecto)
+9. [🔄 Evidencia CI/CD](#10--evidencia-del-despliegue-cicd)
+10. [🌐 Link Expuesto en Azure con Swagger](#11--link-expuesto-en-azure-con-swagger)
+11. [🗂️ Organización del Código](#12-️-organización-del-código)
+12. [📝 Código Documentado](#13--código-documentado)
+13. [🔗 Conexiones con Servicios Externos](#14--conexiones-con-servicios-externos)
+14. [⚙️ Pipeline de Desarrollo](#15-️-pipeline-de-desarrollo)
+15. [🚢 Pipeline de PROD](#16--pipeline-de-prod)
 
-## 1. 👤 Integrantes
 
-| Nombre | Correo |
-|---|---|
-| _(pendiente)_ | _(pendiente)_ |
-
-El equipo aplicó la metodología **Scrum** con sprints semanales, usando **Jira** para seguimiento de tareas y **GitHub Projects** como tablero de trabajo.
-
----
-
-## 2. ⚙️ Tecnologías Utilizadas
+## 1. ⚙️ Tecnologías Utilizadas
 
 | Tecnología | Versión | Justificación |
 |---|---|---|
@@ -77,7 +66,7 @@ El equipo aplicó la metodología **Scrum** con sprints semanales, usando **Jira
 
 ---
 
-## 3. 🎯 Descripción del Módulo
+## 2. 🎯 Descripción del Módulo
 
 El microservicio de Notificaciones gestiona el **ciclo de vida completo de alertas y recordatorios** dentro de PATRICI.A, operando bajo un modelo orientado a eventos. A través de **RabbitMQ (CloudAMQP)** con topología de **Topic Exchange**, consume las señales publicadas por los demás módulos del sistema manteniendo desacoplamiento total respecto a los productores. En total consume **9 colas** a través de **9 consumers** (uno por servicio productor).
 
@@ -99,7 +88,7 @@ El módulo expone **8 endpoints REST** para envío, consulta paginada, conteo de
 
 ---
 
-## 4. 🏗️ Cómo Funciona el Módulo
+## 3. 🏗️ Cómo Funciona el Módulo
 
 ### Modelo Orientado a Eventos
 
@@ -163,13 +152,13 @@ Arquitectura Hexagonal (Ports & Adapters) según la propuesta de Alistair Cockbu
 
 ---
 
-## 5. 📊 Diagramas
+## 4. 📊 Diagramas
 
-### 5.1 Diagrama de Datos — Modelo MongoDB
+### 4.1 Diagrama de Datos — Modelo MongoDB
 
 Modelo desnormalizado en tres colecciones. `notifications` es el núcleo (historial por usuario, tipo, canal y estado de lectura). Antes de crear un registro se consulta `notificationPreferences` para omitir tipos deshabilitados. `eventReminders` es el registro de control del scheduler, con banderas contra duplicados.
 
-> ⚠️ **Pendiente:** agregar `docs/imagenes/NotificationDB.drawio.png`.
+![img.png](src/main/resources/imagenes/img.png)
 
 #### Colección `notifications`
 
@@ -210,24 +199,24 @@ Modelo desnormalizado en tres colecciones. `notifications` es el núcleo (histor
 | reminded24h | Boolean | Si ya se envió el recordatorio de 24h |
 | reminded1h | Boolean | Si ya se envió el recordatorio de 1h |
 
-### 5.2 Diagrama de Clases
+### 4.2 Diagrama de Clases
 
 Tres entidades de dominio (`Notification`, `NotificationPreferences`, `EventReminder`) y dos enumeraciones de soporte (`NotificationType`, `NotificationChannel`).
 
-> ⚠️ **Pendiente:** agregar `docs/imagenes/DiagramaClasesNotification.drawio.png`.
+![img_1.png](src/main/resources/imagenes/img_1.png)
 
-### 5.3 Diagrama de Componentes
+### 4.3 Diagrama de Componentes
 
 - **Adaptadores de entrada:** `SendNotificationController`, `NotificationController`, `PreferencesController`, `EventReminderController` (REST); 9 consumers RabbitMQ; `EventReminderService` (scheduler).
 - **Puertos de entrada (`ports/in`):** `SendNotificationUseCase`, `GetNotificationsUseCase`, `GetUnreadCountUseCase`, `MarkAsReadUseCase`, `GetPreferencesUseCase`, `UpdatePreferencesUseCase`, `CreateEventReminderUseCase`.
 - **Puertos de salida (`ports/out`):** `NotificationRepository`, `PreferencesRepository`, `EventReminderRepository`, `NotificationDeliveryPort`.
 - **Adaptadores de salida:** `NotificationRepositoryAdapter`, `PreferencesRepositoryAdapter`, `EventReminderRepositoryAdapter` (MongoDB) y `NotificationDeliveryAdapter` (WebSocket/STOMP + SMTP).
 
-> ⚠️ **Pendiente:** agregar `docs/imagenes/PDCE.drawio.png`.
+![img_2.png](src/main/resources/imagenes/img_2.png)
 
 ---
 
-## 6. 🧩 Funcionalidades
+## 5. 🧩 Funcionalidades
 
 ### Endpoints REST
 
@@ -472,7 +461,7 @@ Handler centralizado con `@RestControllerAdvice` en `entrypoints/advice/Notifica
 
 ---
 
-## 7. 🧪 Evidencia de Pruebas Unitarias
+## 6. 🧪 Evidencia de Pruebas Unitarias
 
 | Tipo | Descripción | Herramientas |
 |---|---|---|
@@ -509,11 +498,10 @@ mvn clean verify
 - ✅ Todas las pruebas en estado **PASSED**
 - ✅ Casos felices **y** casos de error cubiertos
 
-> ⚠️ **Pendiente:** agregar captura del reporte de pruebas en `docs/`.
-
+![img_3.png](src/main/resources/imagenes/img_3.png)
 ---
 
-## 8. 📈 Evidencia del Análisis de Cobertura
+## 7 . 📈 Evidencia del Análisis de Cobertura
 
 Cobertura generada con **JaCoCo 0.8.10** (`prepare-agent` en `test`, `report` en `test`, `check` en `verify`).
 
@@ -523,11 +511,11 @@ mvn clean verify
 
 Reporte HTML: `target/site/jacoco/index.html`. El pipeline de CI lo publica como artefacto `jacoco-report-notification`.
 
-> ⚠️ **Pendiente:** agregar captura del reporte en `docs/Jacoco.png`.
+![img_4.png](src/main/resources/imagenes/img_4.png)
 
 ---
 
-## 9. 🚀 Cómo Ejecutar el Proyecto
+## 8. 🚀 Cómo Ejecutar el Proyecto
 
 ### Prerrequisitos
 
@@ -587,7 +575,7 @@ Sobrescriben los valores de `application.properties` mediante el relaxed binding
 
 ---
 
-## 10. 🔄 Evidencia del Despliegue CI/CD
+## 9. 🔄 Evidencia del Despliegue CI/CD
 
 Tres workflows de **GitHub Actions**:
 
@@ -597,7 +585,6 @@ Tres workflows de **GitHub Actions**:
 | **CD QA** | `.github/workflows/cd-qa.yml` | push a `develop` |
 | **CD Prod** | `.github/workflows/cd-prod.yml` | push a `main` |
 
-> ⚠️ **Pendiente:** agregar capturas de las ejecuciones en `docs/CI.png` y `docs/CD.png`.
 
 ---
 
@@ -612,10 +599,9 @@ Despliegue en **Azure Container Apps**, resource group `gr-alphaeci-prod`:
 
 Rutas expuestas sobre el FQDN asignado por Azure (ingress externo, target port 8080):
 
-- **Swagger UI:** `https://{fqdn}/swagger-ui.html`
-- **OpenAPI JSON:** `https://{fqdn}/api-docs`
+- **Swagger UI:** `https://notification-service-prod.lemonwater-bf7b63a9.eastus2.azurecontainerapps.io/swagger-ui/index.html`
+- **OpenAPI JSON:** `https://notification-service-prod.lemonwater-bf7b63a9.eastus2.azurecontainerapps.io`
 
-> ⚠️ **Pendiente:** registrar aquí el FQDN definitivo de cada Container App.
 
 ---
 
@@ -677,7 +663,6 @@ notification-service/
 
 La documentación viva del API se genera con **SpringDoc OpenAPI 2.5.0** y se publica en Swagger UI (`/swagger-ui.html`), configurada en `infrastructure/config/OpenApiConfig` bajo el título *Notification Service API*.
 
-> ⚠️ **Pendiente:** completar JavaDoc en dominio, casos de uso, consumers y adaptadores, y enriquecer los controladores con `@Tag`, `@Operation`, `@ApiResponse` y los DTOs con `@Schema`.
 
 ---
 
@@ -695,7 +680,6 @@ La documentación viva del API se genera con **SpringDoc OpenAPI 2.5.0** y se pu
 
 En los despliegues, todas las credenciales se inyectan como variables de entorno desde **GitHub Secrets** (`MONGODB_URI_NOTIFICATION`, `RABBITMQ_*`, `MAIL_*`, `AZURE_CREDENTIALS_Noti`).
 
-> 🔐 **Pendiente de seguridad:** `src/main/resources/application.properties` aún contiene credenciales reales de MongoDB, CloudAMQP y Gmail en texto plano y versionadas en Git. Deben reemplazarse por placeholders (`${SPRING_DATA_MONGODB_URI:}`, etc.) y **rotarse**, ya que quedaron expuestas en el historial del repositorio.
 
 ---
 
