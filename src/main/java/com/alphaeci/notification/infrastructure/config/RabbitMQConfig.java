@@ -44,6 +44,9 @@ public class RabbitMQConfig {
     @Value("${rabbitmq.queues.member}")
     private String memberQueue;
 
+    @Value("${rabbitmq.queues.eventBroadcast}")
+    private String eventBroadcastQueue;
+
     @Bean
     public TopicExchange notificationExchange() {
         return new TopicExchange(exchange);
@@ -81,6 +84,15 @@ public class RabbitMQConfig {
     @Bean
     public Queue memberQueue() { return buildQueue(memberQueue); }
 
+    /**
+     * Distinta de eventQueue (event.#): esta es la publicidad de un evento
+     * nuevo a todos los dispositivos, no un recordatorio a un usuario
+     * puntual, por eso vive bajo un routing key separado (broadcast.event.#)
+     * que no colisiona con la binding existente.
+     */
+    @Bean
+    public Queue eventBroadcastQueue() { return buildQueue(eventBroadcastQueue); }
+
     @Bean
     public Binding authBinding() { return bind(authQueue(), "auth.#"); }
 
@@ -107,6 +119,11 @@ public class RabbitMQConfig {
 
     @Bean
     public Binding memberBinding() { return bind(memberQueue(), "member.#"); }
+
+    @Bean
+    public Binding eventBroadcastBinding() {
+        return bind(eventBroadcastQueue(), "broadcast.event.#");
+    }
 
     @Bean
     public Jackson2JsonMessageConverter messageConverter() {
