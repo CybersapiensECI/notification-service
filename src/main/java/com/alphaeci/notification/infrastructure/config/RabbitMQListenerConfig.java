@@ -16,6 +16,10 @@ public class RabbitMQListenerConfig {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setMessageConverter(converter);
+        // Si el handler lanza excepcion, NO reencolar el mensaje: se enruta al DLX
+        // (o se descarta) en lugar de reintentarse en bucle. Evita la tormenta de
+        // reintentos que satura el SMTP de Gmail y dispara "454 Too many login attempts".
+        factory.setDefaultRequeueRejected(false);
         return factory;
     }
 }
