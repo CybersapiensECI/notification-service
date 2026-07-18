@@ -31,7 +31,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.IMAGE_NAME }}:${{ github.ref_name }},${{ env.IMAGE_NAME }}:latest
+          tags: ${{ env.IMAGE_NAME }}:${{ github.sha }},${{ env.IMAGE_NAME }}:${{ github.ref_name }},${{ env.IMAGE_NAME }}:latest
 
       - name: Log in to Azure
         uses: azure/login@v2
@@ -44,7 +44,7 @@ jobs:
             --name notification-service-prod \
             --resource-group gr-alphaeci-prod \
             --environment gr-alphaeci-prod \
-            --image ${{ env.IMAGE_NAME }}:${{ github.ref_name }} \
+            --image ${{ env.IMAGE_NAME }}:${{ github.sha }} \
             --ingress external \
             --target-port 8080
 
