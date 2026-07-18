@@ -51,7 +51,7 @@ jobs:
           az containerapp update \
             --name notification-service-prod \
             --resource-group gr-alphaeci-prod \
-            --min-replicas 0 \
+            --min-replicas 1 \
             --max-replicas 1 \
             --set-env-vars \
               "SPRING_DATA_MONGODB_URI=${{ secrets.MONGODB_URI_NOTIFICATION }}" \
